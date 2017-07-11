@@ -139,12 +139,15 @@ function getPos(obj){
 var globalStep = 0;
 var hasStep = 0;
 function setscroll(obj,stepType){
+    //移动的步数
     var step = 3;
+	//左移动
     if(stepType=="+"){
         if(hasStep+step > globalStep)//当已左移动距离+默认步长>需要左移动的长度,则步长改为小于默认步长，这样才不会左移过头
             step = globalStep-hasStep;
         hasStep +=step;
     }
+	//右移动
     else{
         if(hasStep-step < globalStep)//当已右移动距离-默认步长<需要到达的长度,则步长改为小于默认步长，这样才不会右移过头
             step = hasStep-globalStep;
