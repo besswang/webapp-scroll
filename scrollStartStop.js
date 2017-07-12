@@ -1,6 +1,7 @@
 /**
  * 函数：scrollstart，scrollstop
  * 描述：监听滚动条滚动或停止
+ * 注意：如果是用高级版本的jquery（如1.9）的话需要将handle改为dispatch，这里已经改成了dispotch
  */
 (function(){
 
