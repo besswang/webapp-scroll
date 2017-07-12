@@ -86,78 +86,35 @@
  </head>
  <body>
     <div class="header">标题</div>
+    <!--二级分类开始-->
     <section>
         <div class="side-left"></div>
         <div class="side-right">
-            <ul>
-                <li class="active" onclick="getPos(this)">水果</li>
-                <li onclick="getPos(this)">蔬菜</li>
-                <li onclick="getPos(this)">牛肉</li>
-                <li onclick="getPos(this)">西瓜</li>
-                <li onclick="getPos(this)">菠菜</li>
-                <li onclick="getPos(this)">牛油果</li>
-                <li onclick="getPos(this)">圣女果</li>
-                <li onclick="getPos(this)">玉米</li>
+            <ul class="side-right-ul">
+                <li class="active">水果开始</li>
+                <li>蔬菜</li>
+                <li>牛肉</li>
+                <li>西瓜</li>
+                <li>菠菜</li>
+                <li>牛油果</li>
+                <li>圣女果</li>
+                <li>玉米</li>
+                <li>苹果</li>
+                <li>羊肉最后</li>
             </ul>
         </div>
     </section>
-
+    <!--二级分类结束-->
  </body>
 </html>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<!--二级类滚动-->
+<script type="text/javascript" src="moveScroll.js"></script>
 <script type="text/javascript">
-function getPos(obj){
-    $(obj).addClass("active").siblings().removeClass("active");
-    var tobj = $("ul");
-    var scrLeft = $(tobj).scrollLeft();
-    var scrWidth = $(tobj).width();
-    // var topTabWidth = $(".top-cls-tab").width();
-    if(parseInt($(obj).position().left) > parseInt(70)){
-        //$(tobj).scrollLeft($(tobj).scrollLeft()+step);
-        var step = $(obj).position().left-70;
-        globalStep = step;
-        hasStep = 0;
-        setscroll(tobj,"+");
-    }
-    else if($(tobj).scrollLeft() > 0 && $(obj).position().left<=70){
-        //$(tobj).scrollLeft($(tobj).scrollLeft()-70);
-        var step = 70-$(obj).position().left;
-        globalStep = 0;
-        hasStep = step;
-        setscroll(tobj,"-");
-    }
-	/*else
-	 alert(scrLeft+","+scrWidth+","+topTabWidth);*/
-}
-
-/**
- * 函数：setscroll(obj,stepType)
- * 描述：二级栏目位置移动的动画
- * 参数：
- *		obj			点击的规格对象
- */
-var globalStep = 0;
-var hasStep = 0;
-function setscroll(obj,stepType){
-    //移动的步数
-    var step = 3;
-	//左移动
-    if(stepType=="+"){
-        if(hasStep+step > globalStep)//当已左移动距离+默认步长>需要左移动的长度,则步长改为小于默认步长，这样才不会左移过头
-            step = globalStep-hasStep;
-        hasStep +=step;
-    }
-	//右移动
-    else{
-        if(hasStep-step < globalStep)//当已右移动距离-默认步长<需要到达的长度,则步长改为小于默认步长，这样才不会右移过头
-            step = hasStep-globalStep;
-        hasStep -=step;
-        step = -step;
-    }
-
-    if((stepType =="+" && hasStep < globalStep) || stepType =="-" && hasStep > globalStep){
-        $(obj).scrollLeft($(obj).scrollLeft()+step);
-        setTimeout(function(){setscroll(obj,stepType)},1);
-    }
-}
+    $(function () {
+        //二级分类滚动
+        $(".side-right-ul").on("click","li",function () {
+            getPos($(this),$(this).parent());
+        });
+    });
 </script>
