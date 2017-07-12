@@ -82,9 +82,40 @@
         float:right;
         background:#96b97d;
     }
+      .voucher-img{
+          width:70px;
+          height:55px;
+          background:url("voucher.png") no-repeat -14px -2px;
+          background-size:cover;
+          position:absolute;
+          left:15px;
+          bottom:80px;
+          z-index:12 ;
+      }
+      dl,dd{
+          padding:0;
+          margin:0;
+      }
+      .goods-con{
+          position:absolute;
+          top:75px;
+          right:0;
+          background:yellow;
+          width:calc(100% - 100px);
+          height:calc(100% - 75px);
+          overflow-y:scroll;
+      }
+      .goods-con .goods-dl{
+          height:5000px;
+      }
+    .goods-con .goods-dl>dd{
+        height:100px;
+        text-align:center;
+    }
   </style>
  </head>
  <body>
+ <div class="voucher-img"></div>
     <div class="header">标题</div>
     <!--二级分类开始-->
     <section>
@@ -102,6 +133,13 @@
                 <li>苹果</li>
                 <li>羊肉最后</li>
             </ul>
+            <div class="goods-con">
+                <dl class="goods-dl">
+                    <dd>商品1</dd>
+                    <dd>商品1</dd>
+                    <dd>商品1</dd>
+                </dl>
+            </div>
         </div>
     </section>
     <!--二级分类结束-->
@@ -110,11 +148,30 @@
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <!--二级类滚动-->
 <script type="text/javascript" src="moveScroll.js"></script>
+<!--监听滚动-->
+<script type="text/javascript" src="scrollStartStop.js"></script>
 <script type="text/javascript">
     $(function () {
+
         //二级分类滚动
         $(".side-right-ul").on("click","li",function () {
             getPos($(this),$(this).parent());
+        });
+
+        //监听滚动
+        $(".goods-con").bind('scrollstart', function(){
+            console.log("start");
+            $(".voucher-img").animate({
+                left:"-24px"
+            })
+            $(".voucher-img").css("background-position-y","-62px")
+        });
+        $(".goods-con").bind('scrollstop', function(e){
+            console.log("end");
+            $(".voucher-img").animate({
+                left:"15px"
+            });
+            $(".voucher-img").css("background-position-y","-2px")
         });
     });
 </script>
